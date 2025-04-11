@@ -515,7 +515,7 @@
         // Update name and profile
         document.getElementById("user-name").textContent = userData.name;
         document.getElementById("profile-initial").textContent = userData.name.charAt(0).toUpperCase();
-        document.getElementById("profileLink").href = `view-profile.html?username=${encodeURIComponent(userData.name)}`;
+        document.getElementById("profileLink").href = `./view-profile.html?username=${userData.name}`;
         fetchStudyPartners(userData.email)
         fetchSubjects(userData.id);
         fetchStudyGroups(userData.id);

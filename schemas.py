@@ -82,3 +82,6 @@ class GroupResponse(BaseModel):
 
 class SubjectCreate(BaseModel):
     subject_name: str
+
+class PostQuery(BaseModel):
+    query_str: str

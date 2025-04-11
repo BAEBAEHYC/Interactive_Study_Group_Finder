@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from db import get_db, get_current_user_email
 from models import StudyGroup, GroupMember, StudentInformation, MeetingSchedule
-from schemas import GroupCreate, GroupResponse, MeetingResponse
+from schemas import GroupCreate, GroupResponse, MeetingResponse, UserIDQuery
 from datetime import datetime
 
 router = APIRouter()
@@ -126,3 +126,16 @@ def leave_group(
     db.commit()
 
     return {"message": "Left the group successfully"}
+
+@router.put("/study_groups")
+def my_study_groups(id: UserIDQuery, db: Session = Depends(get_db)):
+    myGroups = db.query(GroupMember).filter(GroupMember.student_id == id.id).all()
+    study_groups = {}
+    x = 0
+    for group in myGroups:
+        study_groups[f'group{x}'] = db.query(StudyGroup).filter(StudyGroup.id == group.group_id).first().__dict__
+        members = db.query(GroupMember).filter(GroupMember.group_id == group.group_id).all()
+        study_groups[f'group{x}']["memberCount"] = len(members)
+        study_groups[f'group{x}']["meetings"] = db.query(MeetingSchedule).filter(MeetingSchedule.group_id == study_groups[f'group{x}']["id"]).all()
+        x += 1
+    return study_groups

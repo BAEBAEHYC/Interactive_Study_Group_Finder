@@ -105,6 +105,28 @@ def join_group(
 
     return {"message": "Joined group successfully"}
 
+@router.post("/leave_group/{group_id}")
+def leave_group(
+    group_id: int,
+    db: Session = Depends(get_db),
+    current_user_email: str = Depends(get_current_user_email)
+):
+    student = db.query(StudentInformation).filter_by(email=current_user_email).first()
+    if not student:
+        raise HTTPException(status_code=404, detail="Student not found")
+
+    membership = db.query(GroupMember).filter_by(group_id=group_id, student_id=student.id).first()
+    if not membership:
+        raise HTTPException(status_code=404, detail="Not a group member")
+
+    if membership.role == "admin":
+        raise HTTPException(status_code=403, detail="Admin cannot leave the group. You must delete it.")
+
+    db.delete(membership)
+    db.commit()
+
+    return {"message": "Left the group successfully"}
+
 @router.put("/study_groups")
 def my_study_groups(id: UserIDQuery, db: Session = Depends(get_db)):
     myGroups = db.query(GroupMember).filter(GroupMember.student_id == id.id).all()
@@ -115,7 +137,5 @@ def my_study_groups(id: UserIDQuery, db: Session = Depends(get_db)):
         members = db.query(GroupMember).filter(GroupMember.group_id == group.group_id).all()
         study_groups[f'group{x}']["memberCount"] = len(members)
         study_groups[f'group{x}']["meetings"] = db.query(MeetingSchedule).filter(MeetingSchedule.group_id == study_groups[f'group{x}']["id"]).all()
-        print(study_groups[f'group{x}'])
         x += 1
-    print(study_groups)
     return study_groups

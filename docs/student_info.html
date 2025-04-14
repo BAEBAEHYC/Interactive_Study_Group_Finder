@@ -46,7 +46,7 @@
       }
 
       // ✅ FastAPI 포트 8000으로 변경됨
-      fetch("http://localhost:5000/me", {
+      fetch("https://interactive-study-group-finder.onrender.com/me", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`
@@ -74,7 +74,7 @@
         const updatedEmail = emailInput.value.trim();
 
         // ✅ 포트 8000으로 변경
-        fetch(`http://localhost:5000/students/${studentId}`, {
+        fetch(`https://interactive-study-group-finder.onrender.com/students/${studentId}`, {
           method: "PUT",
           headers: {
             "Authorization": `Bearer ${token}`,

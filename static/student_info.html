@@ -45,7 +45,7 @@
         return;
       }
 
-      // Fetch current user data
+      // ✅ FastAPI 포트 8000으로 변경됨
       fetch("http://localhost:5000/me", {
         method: "GET",
         headers: {
@@ -59,7 +59,7 @@
       .then(data => {
         nameInput.value = data.name;
         emailInput.value = data.email;
-        studentId = data.id; // Save ID for update
+        studentId = data.id;
       })
       .catch(err => {
         console.error("Error:", err);
@@ -67,13 +67,13 @@
         window.location.href = "login.html";
       });
 
-      // Update button click handler
       updateButton.addEventListener("click", () => {
         if (!studentId) return;
 
         const updatedName = nameInput.value.trim();
         const updatedEmail = emailInput.value.trim();
 
+        // ✅ 포트 8000으로 변경
         fetch(`http://localhost:5000/students/${studentId}`, {
           method: "PUT",
           headers: {

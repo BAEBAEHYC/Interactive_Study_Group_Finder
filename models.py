@@ -1,7 +1,19 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Time, Enum, DateTime
 from datetime import datetime
 from db import Base
+from sqlalchemy.orm import relationship
 
+class ChatMessage(Base):
+    __tablename__ = "chat_messages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    group_id = Column(Integer, ForeignKey("study_groups.id"))  
+    sender_email = Column(String(255))  
+    content = Column(String(1000))      
+    timestamp = Column(DateTime, default=datetime.utcnow)
+
+    group = relationship("StudyGroup", back_populates="chat_messages")
+    
 class StudentInformation(Base):
     __tablename__ = "student_information"
 
@@ -49,6 +61,7 @@ class StudyGroup(Base):
     name = Column(String(255), nullable=False)
     subject_id = Column(Integer, ForeignKey("available_subjects.id"))
     created_at = Column(DateTime, default=datetime.utcnow)
+    chat_messages = relationship("ChatMessage", back_populates="group")
 
 class GroupMember(Base):
     __tablename__ = "group_members"
@@ -64,12 +77,14 @@ class MeetingSchedule(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     host_id = Column(Integer, ForeignKey("student_information.id"), nullable=False)
-    subject_id = Column(Integer, ForeignKey("available_subjects.id"), nullable=True)  # ✅ add this
+    group_id = Column(Integer, ForeignKey("study_groups.id"), nullable=True)
+    subject_id = Column(Integer, ForeignKey("available_subjects.id"), nullable=True)
     title = Column(String(255), nullable=False)
     description = Column(String(1000))
     meeting_time = Column(DateTime, nullable=False)
     room_name = Column(String(255), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
+
 
 class MeetingInvite(Base):
     __tablename__ = "meeting_invites"

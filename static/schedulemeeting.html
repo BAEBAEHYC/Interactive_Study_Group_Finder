@@ -81,6 +81,10 @@
     const subject = document.getElementById("subject").value.trim();
     const description = document.getElementById("description").value;
     const meetingTime = document.getElementById("meeting-time").value;
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const group_id_query = urlParams.get("group_id");
+
 
     const response = await fetch(`${API_URL}/schedule-meeting`, {
         method: "POST",

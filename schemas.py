@@ -1,6 +1,19 @@
 from pydantic import BaseModel
 from datetime import datetime
 
+
+#Chat
+class ChatCreate(BaseModel):
+    message: str
+
+class ChatOut(BaseModel):
+    sender: str
+    content: str
+    timestamp: datetime
+
+    class Config:
+        orm_mode = True
+
 # login/registration
 class UserCreate(BaseModel):
     name: str
@@ -36,6 +49,9 @@ class PartnerInfo(BaseModel):
 class StudentName(BaseModel):
     name: str
 
+class UserIDQuery(BaseModel):
+    id: int
+
 # student info
 class StudentResponse(BaseModel):
     id: int
@@ -43,7 +59,7 @@ class StudentResponse(BaseModel):
     email: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # meetings
 class MeetingCreateRequest(BaseModel):
@@ -51,7 +67,8 @@ class MeetingCreateRequest(BaseModel):
     description: str
     meeting_time: datetime
     subject_name: str
-
+    group_id: int
+    
 class InviteUserRequest(BaseModel):
     meeting_title: str
     invitee_email: str
@@ -79,3 +96,6 @@ class GroupResponse(BaseModel):
 
 class SubjectCreate(BaseModel):
     subject_name: str
+    
+class PostQuery(BaseModel):
+    query_str: str

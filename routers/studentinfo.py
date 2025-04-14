@@ -18,7 +18,8 @@ def get_all_students(db: Session = Depends(get_db)):
     if not students:
         raise HTTPException(status_code=404, detail="No students found")
 
-    return [StudentResponse(name=student.name, email=student.email) for student in students]
+    return [StudentResponse(id=student.id, name=student.name, email=student.email) for student in students]
+
 
 @router.put("/students/{student_id}", response_model=StudentResponse)
 def update_student(student_id: int, student: StudentUpdateRequest, db: Session = Depends(get_db)):
@@ -62,8 +63,8 @@ def get_view_profile_page(username: str, request: Request, db: Session = Depends
     return templates.TemplateResponse("view-profile.html", {"request": request, "student": student}) 
 
 @router.post("/view-profile")
-def get_profile_info(student_input: StudentName, db: Session = Depends(get_db)):
-    student = db.query(StudentInformation).filter(StudentInformation.name == student_input.name).first()
+def get_profile_info(student: StudentName, db: Session = Depends(get_db)):
+    student = db.query(StudentInformation).filter(StudentInformation.name == student.name).first()
     if not student:
         raise HTTPException(status_code=404, detail="Student not found")
     name = student.name

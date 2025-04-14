@@ -330,5 +330,95 @@
     margin: 20px auto;
     padding: 20px;
   }
+
+  .page-title {
+    font-size: large;
+    color: #5C67F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #profile-name-div {
+    width: 50%;
+    display: flex;
+    justify-content:space-between;
+    padding-top: 30px;
+    font-size: medium;
+
+  }
+
+  #profile-details {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+
+  }
+
+  #left-side-profile {
+    width: 45%;
+  }
+
+  #right-side-profile {
+    width: 45%;
+  }
+
+  #profile-friends-section {
+    padding-top: 30px;
+    width: 80%;
+  }
+
+  .meeting-item, .friend-item, .subject-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .meeting-item:last-child, .friend-item:last-child, .subject-item:last-child {
+    border-bottom: none;
+  }
+
+  .meeting-icon, .friend-avatar, .subject-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e9ecff;
+    color: #5C67F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 18px;
+  }
+
+  .meeting-details, .friend-details, .subject-details {
+    flex: 1;
+  }
+
+  .meeting-title, .friend-name, .subject-name {
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 5px;
+  }
+
+  .meeting-time, .friend-status, .subject-info {
+    font-size: 13px;
+    color: #888;
+    margin: 0;
+  }
+
+  .meeting-action, .friend-action, .subject-action {
+    padding: 6px 12px;
+    background-color: #f0f0f0;
+    color: #555;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .meeting-action:hover, .friend-action:hover, .subject-action:hover {
+    background-color: #e0e0e0;
+  }
   
   

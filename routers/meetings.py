@@ -24,19 +24,31 @@ def schedule_meeting(meeting: MeetingCreateRequest, db: Session = Depends(get_db
         db.add(subject)
         db.commit()
         db.refresh(subject)
-
-    new_meeting = MeetingSchedule(
-        host_id=host.id,
-        subject_id=subject.id,  # ✅ use subject.id now
-        title=meeting.title,
-        description=meeting.description,
-        meeting_time=meeting.meeting_time,
-        room_name=f"studybuddy-room-{host.id}-{int(datetime.utcnow().timestamp())}"
-    )
-    db.add(new_meeting)
-    db.commit()
-    db.refresh(new_meeting)
-
+    if (meeting.group_id!=0):
+        new_meeting = MeetingSchedule(
+            host_id=host.id,
+            subject_id=subject.id,  # ✅ use subject.id now
+            title=meeting.title,
+            description=meeting.description,
+            meeting_time=meeting.meeting_time,
+            room_name=f"studybuddy-room-{host.id}-{int(datetime.utcnow().timestamp())}",
+            group_id=meeting.group_id
+        )
+        db.add(new_meeting)
+        db.commit()
+        db.refresh(new_meeting)
+    else:
+        new_meeting = MeetingSchedule(
+            host_id=host.id,
+            subject_id=subject.id,  # ✅ use subject.id now
+            title=meeting.title,
+            description=meeting.description,
+            meeting_time=meeting.meeting_time,
+            room_name=f"studybuddy-room-{host.id}-{int(datetime.utcnow().timestamp())}",
+        )
+        db.add(new_meeting)
+        db.commit()
+        db.refresh(new_meeting)
     return {"message": "Meeting scheduled", "meeting_id": new_meeting.id}
 
 @router.post("/invite-to-meeting")

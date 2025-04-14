@@ -5,23 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .about-container {
+      max-width: 900px;
+      margin: 100px auto 50px;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-member {
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .team-member:last-child {
+      border-bottom: none;
+    }
+
+    .member-name {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .member-role {
+      font-size: 14px;
+      color: #666;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
-    <header id="header">
-      <h1 class="header-title">Study Group Finder</h1>
-      <div class="empty"></div>
-      <nav id="nav-bar">
-        <ul>
-          <li><a href="schedulemeeting.html" class="nav-link">Schedule Meeting</a></li>
-          <li><a href="meeting.html" class="nav-link">Meet Now!</a></li>
-          <li><a href="find_help.html" class="nav-link">Find Study Help</a></li>
-          <li><a href="search_users.html" class="nav-link">Search Study Groups</a></li>
-          <li><a href="#" class="nav-link" id="profileLink">Profile</a></li>
-          <li><a href="friends.html" class="nav-link">Friends</a></li>
-          <li><a href="invites.html" class="nav-link">My Invites</a></li>
-          <li><a href="about.html" class="nav-link">About Us</a></li>
-        </ul>
-      </nav>
-    </header>
+  <header id="header">
+    <h1 class="header-title">Study Group Finder</h1>
+    <div class="empty"></div>
+    <nav id="nav-bar">
+      <ul>
+        <li><a href="schedulemeeting.html" class="nav-link">Schedule Meeting</a></li>
+        <li><a href="meeting.html" class="nav-link">Meet Now!</a></li>
+        <li><a href="find_help.html" class="nav-link">Find Study Help</a></li>
+        <li><a href="search_users.html" class="nav-link">Search Study Groups</a></li>
+        <li><a href="#" class="nav-link" id="profileLink">Profile</a></li>
+        <li><a href="friends.html" class="nav-link">Friends</a></li>
+        <li><a href="invites.html" class="nav-link">My Invites</a></li>
+        <li><a href="about.html" class="nav-link active">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
 
+  <main>
+    <div class="about-container">
+      <h2>Our Team</h2>
+
+      <div class="team-member">
+        <div class="member-name">Eric (Hyeonsu) Choi</div>
+        <div class="member-role">Modules: </div>
+      </div>
+      
+      <div class="team-member">
+        <div class="member-name">Duncan Bennett-Conner</div>
+        <div class="member-role">Modules: </div>
+      </div>
+
+       <div class="team-member">
+        <div class="member-name">Andy Kim</div>
+        <div class="member-role">Modules: [</div>
+      </div>
+      
+      <div class="team-member">
+        <div class="member-name">Jainish Patel</div>
+        <div class="member-role">Modules: </div>
+      </div>
+
+       <div class="team-member">
+        <div class="member-name">Alex Stokes</div>
+        <div class="member-role">Modules: </div>
+       </div>
+
+      <div class="team-member">
+        <div class="member-name">Omokhudu Akhigbe</div>
+        <div class="member-role">Modules: </div>
+      </div>
+    </div>
+  </main>
 </body>
+</html>

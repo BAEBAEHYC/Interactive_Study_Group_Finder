@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -7,42 +7,61 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<main class="container">
-<ul id="invite-list"></ul>
+  <header id="header">
+    <div class="header-title">Study Group Finder</div>
+    <nav id="nav-bar">
+      <ul>
+        <li><a href="homepage.html" class="active">Home</a></li>
+        <li><a href="your_group.html">Your Groups</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<script>
-    const API_URL = "http://127.0.0.1:5000";
+  <main>
+    <div class="container">
+      <div class="form-container">
+        <h2>My Meeting Invites</h2>
+        <ul id="invite-list"></ul>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const API_URL = "https://interactive-study-group-finder.onrender.com";
     const token = localStorage.getItem("token");
 
     async function loadInvites() {
-        const response = await fetch(`${API_URL}/my-meeting-invites`, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+      const response = await fetch(`${API_URL}/my-meeting-invites`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
-        if (!response.ok) {
-            alert("Could not load meeting invites.");
-            return;
-        }
+      if (!response.ok) {
+        alert("Could not load meeting invites.");
+        return;
+      }
 
-        const invites = await response.json();
-        const list = document.getElementById("invite-list");
-        list.innerHTML = "";
+      const invites = await response.json();
+      const list = document.getElementById("invite-list");
+      list.innerHTML = "";
 
-        invites.forEach(invite => {
-            const li = document.createElement("li");
-            li.innerHTML = `
-                <strong>${invite.title}</strong> - ${invite.meeting_time}<br/>
-                <em>${invite.description}</em><br/>
-                <button onclick="joinMeeting('${invite.room_name}')">Join</button>
-                <hr/>
-            `;
-            list.appendChild(li);
-        });
+      invites.forEach(invite => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <strong>${invite.title}</strong> - ${invite.meeting_time}<br/>
+          <em>${invite.description}</em><br/>
+          <button onclick="joinMeeting('${invite.room_name}')">Join</button>
+          <hr/>
+        `;
+        list.appendChild(li);
+      });
     }
 
     function joinMeeting(roomName) {
-        window.location.href = `meeting.html?room=${encodeURIComponent(roomName)}`;
+      window.location.href = `meeting.html?room=${encodeURIComponent(roomName)}`;
     }
 
     window.onload = loadInvites;
-</script>
+  </script>
+</body>
+</html>

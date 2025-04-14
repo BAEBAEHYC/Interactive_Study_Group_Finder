@@ -1,6 +1,19 @@
 from pydantic import BaseModel
 from datetime import datetime
 
+
+
+
+class ChatCreate(BaseModel):
+    message: str
+
+class ChatOut(BaseModel):
+    sender: str
+    content: str
+    timestamp: datetime
+
+    class Config:
+        orm_mode = True
 # login/registration
 class UserCreate(BaseModel):
     name: str

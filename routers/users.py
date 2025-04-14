@@ -30,6 +30,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 # API Endpoint - Login verification
 @router.post("/login") 
 def login_user(request: LoginRequest, db: Session = Depends(get_db)):
+    print("🔥 /login endpoint called")
     user = db.query(StudentInformation).filter(StudentInformation.email == request.email).first()
     if not user or not bcrypt.checkpw(request.password.encode("utf-8"), user.password_hash.encode("utf-8")):
         raise HTTPException(status_code=401, detail="Invalid email or password")

@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles  
 
 from db import engine, Base 
-from routers import studentinfo, friendslist, subjects, users, meetings, groups, search
+from routers import studentinfo, friendslist, subjects, users,chat, meetings, groups, search
 
 app = FastAPI()
 
@@ -34,6 +34,7 @@ app.include_router(users.router)
 app.include_router(meetings.router)
 app.include_router(groups.router)
 app.include_router(search.router)
+app.include_router(chat.router)
 
 
 @app.get("/")

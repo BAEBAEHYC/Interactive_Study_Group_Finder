@@ -274,7 +274,7 @@
     <div class="empty"></div>
     <nav id="nav-bar">
       <ul>
-        <li><a href="schedulemeeting.html" class="nav-link">Schedule Meeting</a></li>
+        <li><a href="schedulemeeting.html?group_id=0" class="nav-link">Schedule Meeting</a></li>
         <li><a href="meeting.html" class="nav-link">Meet Now!</a></li>
         <li><a href="find_help.html" class="nav-link">Find Study Help</a></li>
         <li><a href="search_users.html" class="nav-link">Search Study Groups</a></li>
@@ -572,12 +572,13 @@
           for (const group in study_groups) {
             study_groups[group]["meetings"].forEach(meeting => {
               meetingCounter += 1;
+              meetingContainer.innerHTML = "";
               meetingContainer.innerHTML += `
                 <div class="meeting-item">
                   <div class="meeting-icon">M</div>
                   <div class="meeting-details">
                     <h4 class="meeting-title">${meeting["title"]}</h4>
-                    <p class="meeting-time">${meeting["description"]} • ${study_groups[group]["name"]}</p>
+                    <p class="meeting-time">${meeting["description"]} • ${study_groups[group]["name"]} • ${meeting["meeting_time"]}</p>
                   </div>
                   <button class="meeting-action">View</button>
                 </div>`

@@ -54,6 +54,7 @@ class MeetingCreateRequest(BaseModel):
     description: str
     meeting_time: datetime
     subject_name: str
+    group_id: int
 
 class InviteUserRequest(BaseModel):
     meeting_title: str

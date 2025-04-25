@@ -136,6 +136,7 @@ def my_study_groups(id: UserIDQuery, db: Session = Depends(get_db)):
         study_groups[f'group{x}'] = db.query(StudyGroup).filter(StudyGroup.id == group.group_id).first().__dict__
         members = db.query(GroupMember).filter(GroupMember.group_id == group.group_id).all()
         study_groups[f'group{x}']["memberCount"] = len(members)
-        study_groups[f'group{x}']["meetings"] = db.query(MeetingSchedule).filter(MeetingSchedule.group_id == study_groups[f'group{x}']["id"]).all()
+        now = datetime.now()
+        study_groups[f'group{x}']["meetings"] = db.query(MeetingSchedule).filter(MeetingSchedule.group_id == study_groups[f'group{x}']["id"]).filter(MeetingSchedule.meeting_time > now).all()
         x += 1
     return study_groups
